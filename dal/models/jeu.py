@@ -10,4 +10,9 @@ class Jeu(Base):
     date_sortie = Column(Date)
     prix = Column(DECIMAL(10,2))
 
+    developpeur_id = Column(Integer, ForeignKey("developpeurs.developpeur_id"), nullable = False)
+
     details = relationship("DetailJeu", back_populates = "jeu", uselist = False)
+
+    #One-to-Many : inverse
+    developpeur = relationship("Developpeur", back_populates = "jeux")
