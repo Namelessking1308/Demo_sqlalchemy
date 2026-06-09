@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from decimal import Decimal
 from dal.models import Jeu, DetailJeu, Developpeur, Plateforme
 from dal.database import get_session, init_db, test_connection
@@ -53,7 +53,45 @@ def lire_jeux(session):
 
 
 def creer_jeux(session):
-    pass
+
+        titre = input("Entrer le titre du jeu: ")
+        date_jeu = datetime.strptime(input("Entrer la date de sortie du jeu: "), "%Y-%m-%d").date()
+        prix = Decimal(input("Entrer le prix du jeu: "))
+        nom_dev = input("Entrer le nom du developpeur: ")
+        pays = input("Entrer le pays du developpeur: ")
+        description_jeu = input("Entrer une déscription du jeu: ")
+        note_jeu = int(input("Entrez une note /20: "))
+        multi = input("Est-ce un jeu multijoueur ? (o/n) ").lower()
+        nom_console = input("Entrez une plateforme pour le jeu: ")
+        fabricant_console = input("Entrez le fabriquant de la console: ")
+
+        developpeur = Developpeur(
+            nom = nom_dev,
+            pays = pays
+        )
+
+        jeu = Jeu(
+            titre = titre,
+            date_sortie = date_jeu,
+            prix = prix,
+            developpeur = developpeur
+        )
+        session.add(jeu)
+        session.commit()
+        print("Nouveau jeu créer avec succès !")
+
+        jeu.details = DetailJeu(
+            description = description_jeu,
+            note_metacritic = note_jeu,
+            multijoueur = multi if multi == "o" else False
+        )
+
+        console = Plateforme(
+            nom = nom_console,
+            fabricant = fabricant_console
+        )
+
+        jeu.plateformes.append(console)
 
 def mettre_a_jour(session):
     pass
@@ -105,7 +143,6 @@ def main():
             retry = False
         else:
             print("Choix invalide.")
-    
 
 if __name__ == "__main__":
     main()

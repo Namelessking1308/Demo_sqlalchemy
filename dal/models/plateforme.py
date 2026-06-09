@@ -9,4 +9,4 @@ class Plateforme(Base):
     nom = Column(String(50), nullable = False, unique = True)
     fabricant = Column(String(50))
 
-    jeux = relationship("Jeu", "jeux_plateformes", back_populates = "plateformes")
+    jeux = relationship("Jeu", secondary = "jeux_plateformes", back_populates = "plateformes")
