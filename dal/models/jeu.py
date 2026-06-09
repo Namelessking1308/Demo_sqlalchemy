@@ -17,6 +17,6 @@ class Jeu(Base):
     #One-to-Many : inverse
     developpeur = relationship("Developpeur", back_populates = "jeux")
 
-    jeux = relationship("Plateforme", "jeux_plateformes", back_populates = "jeux")
+    plateformes = relationship("Plateforme", "jeux_plateformes", back_populates = "jeux")
 
     # plateformes
