@@ -1,5 +1,4 @@
 """
-
 Modèle developpeur
 
 Relation : One-to-Many

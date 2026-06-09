@@ -1,4 +1,4 @@
-from dal.models import Jeu, DetailJeu
+from dal.models import Jeu, DetailJeu, Developpeur
 from dal.database import get_session, init_db, test_connection
 
 def main():
